@@ -9,12 +9,10 @@ const { startScheduler } = require('./scheduler/newsRefreshScheduler');
 async function main() {
   await connectDb();
 
-  // 1. Wipe cached articles and logs on startup to force fresh news fetching
   console.log('[server] Clearing old news articles and fetch logs...');
   await Article.deleteMany({});
   await FetchLog.deleteMany({});
 
-  // 2. Clear ONLY expired password reset tokens from users (keeps valid accounts intact)
   try {
     await User.updateMany(
       { resetPasswordExpires: { $lt: Date.now() } },
@@ -25,7 +23,6 @@ async function main() {
     console.warn('[server] Warning during expired token cleanup:', err.message);
   }
 
-  // 3. Start background global news refresh scheduler
   startScheduler();
 
   app.listen(env.port, () => {
@@ -33,7 +30,11 @@ async function main() {
   });
 }
 
-main().catch((err) => {
-  console.error('[server] Fatal startup error:', err);
-  process.exit(1);
-});
+if (require.main === module) {
+  main().catch((err) => {
+    console.error('[server] Fatal startup error:', err);
+    process.exit(1);
+  });
+}
+
+module.exports = app;
