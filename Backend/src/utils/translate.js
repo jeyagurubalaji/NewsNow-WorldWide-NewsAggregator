@@ -15,7 +15,7 @@ const SUPPORTED_LANGUAGES = {
   eo: 'Esperanto', et: 'Estonian', ee: 'Ewe', tl: 'Filipino', fi: 'Finnish',
   fr: 'French', fy: 'Frisian', gl: 'Galician', ka: 'Georgian', de: 'German',
   el: 'Greek', gn: 'Guarani', gu: 'Gujarati', ht: 'Haitian Creole', ha: 'Hausa',
-  haw: 'Hawaiian', iw: 'Hebrew', hi: 'Hindi', hmn: 'Hmong', hu: 'Hungarian',
+  haw: 'Hawaiian', he: 'Hebrew', hi: 'Hindi', hmn: 'Hmong', hu: 'Hungarian',
   is: 'Icelandic', ig: 'Igbo', ilo: 'Ilocano', id: 'Indonesian', ga: 'Irish',
   it: 'Italian', ja: 'Japanese', jw: 'Javanese', kn: 'Kannada', kk: 'Kazakh',
   km: 'Khmer', rw: 'Kinyarwanda', gom: 'Konkani', ko: 'Korean', kri: 'Krio',
