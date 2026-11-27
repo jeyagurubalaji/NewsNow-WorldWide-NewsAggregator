@@ -57,14 +57,7 @@ export default function App() {
                 </ProtectedRoute>
               }
             />
-            <Route
-              path="/detective"
-              element={
-                <ProtectedRoute>
-                  <TrueDetectiveView />
-                </ProtectedRoute>
-              }
-            />
+
           </Route>
         </Routes>
       </BrowserRouter>
