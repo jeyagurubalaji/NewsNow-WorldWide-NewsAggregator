@@ -3,6 +3,7 @@ const router = express.Router()
 const bcrypt = require('bcryptjs')
 const nodemailer = require('nodemailer')
 const { OAuth2Client } = require('google-auth-library')
+const { connectDb } = require('../config/db')
 const User = require('../models/User')
 const { generateToken } = require('../utils/jwt')
 
@@ -21,6 +22,7 @@ const transporter = nodemailer.createTransport({
 // =================== 1. Standard Register ===================
 router.post('/register', async (req, res) => {
   try {
+    await connectDb()
     const { fullName, email, password, preferredCountry } = req.body
 
     if (!email || !password) {
@@ -50,7 +52,7 @@ router.post('/register', async (req, res) => {
     })
   } catch (err) {
     console.error('Registration Error:', err)
-    res.status(500).json({ message: 'Could not create your account' })
+    res.status(500).json({ message: err.message || 'Could not create your account' })
   }
 })
 
