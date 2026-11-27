@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const { corsOptions } = require('./config/corsConfig');
+const { connectDb } = require('./config/db');
 const { errorHandler } = require('./middleware/errorHandler');
 
 const authRoutes = require('./routes/authRoutes');
@@ -15,13 +16,21 @@ app.use(express.json());
 
 app.get('/actuator/health', (req, res) => res.json({ status: 'UP' }));
 
+// Ensure MongoDB is connected on serverless cold starts before handling API requests
+app.use('/api', async (req, res, next) => {
+  try {
+    await connectDb();
+    next();
+  } catch (err) {
+    next(err);
+  }
+});
+
 app.use('/api/auth', authRoutes);
 app.use('/api/news', newsRoutes);
 app.use('/api/bookmarks', bookmarkRoutes);
 app.use('/api/translate', translateRoutes);
 
-// Must be registered last — Express only treats a 4-arg middleware as an error
-// handler when nothing before it has already sent a response.
 app.use(errorHandler);
 
 module.exports = app;
