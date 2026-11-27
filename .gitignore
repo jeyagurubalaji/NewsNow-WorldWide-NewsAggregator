@@ -1,0 +1,23 @@
+# Backend Ignores
+backend/node_modules/
+backend/.env
+backend/*.log
+
+# Frontend Ignores
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+
+# Python & TrueDetective Ignores
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.venv/
+venv/
+ENV/
+
+# Global OS Files
+.DS_Store
+Thumbs.db
